@@ -76,11 +76,20 @@ class ProgressRing {
     }
 }
 
+// Массив для хранения экземпляров
+const progressBarsInstances = [];
+
+
 // Инициализация нескольких экземпляров
 window.onload = function () {
     const progressBars = document.querySelectorAll('.progress-ring-container');
 
     progressBars.forEach((container) => {
-        new ProgressRing(container);
+        const progressRingInstance = new ProgressRing(container);
+        progressBarsInstances.push(progressRingInstance); // Сохраняем экземпляр в массив
     });
+
+    // if (progressBarsInstances[1]) {
+    //     progressBarsInstances[1].setProgress(50); // Устанавливаем 50% для второго прогресс-бара
+    // }
 };
