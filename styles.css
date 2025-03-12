@@ -202,3 +202,21 @@ input[type="number"]::-ms-clear {
         flex-direction: row;
     }
 }
+
+@keyframes rotateCircle {
+    0% {
+        transform: rotate(-90deg); /* Начало с -90deg */
+    }
+    100% {
+        transform: rotate(270deg); /* Конечная точка: 270deg */
+    }
+}
+
+.progress-ring__circle {
+    transform-origin: center;
+    transform: rotate(-90deg); /* Установить начальный угол на -90deg */
+}
+
+.progress-ring__circle.animate {
+    animation: rotateCircle 2s linear infinite;
+}
