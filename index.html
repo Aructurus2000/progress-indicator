@@ -6,8 +6,48 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>progress-indicator</title>
+    <link rel="stylesheet" href="css-normalize.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
+<main class="main">
+    <div class="progress-ring-container">
+        <section class="circular-progress-bar">
+            <h2>Progress</h2>
+            <div class="circular-progress-bar-loader">
+                <svg class="progress-ring">
+                    <!-- Серый круг фона -->
+                    <circle class="progress-ring__circle-background"
+                            stroke="var(--base-accent-color)"
+                            stroke-width="10"
+                            cx="70" cy="70" r="60"
+                            fill="transparent"/>
+                    <!-- Прогресс -->
+                    <circle class="progress-ring__circle"
+                            stroke="var(--accent-color)"
+                            stroke-width="10"
+                            cx="70" cy="70" r="60"
+                            fill="transparent"/>
+                </svg>
+            </div>
 
+            <div class="circular-progress-bar-settings">
+                <label class="input-container">
+                    <input type="number" min="1" max="100" class="percent" value="10"/>
+                    <span>Value</span>
+                </label>
+                <label class="toggle">
+                    <input type="checkbox" class="checkbox animateCheckbox"/>
+                    <span></span> Animate
+                </label>
+                <label class="toggle">
+                    <input type="checkbox" class="checkbox hideCheckbox"/>
+                    <span></span> Hide
+                </label>
+            </div>
+        </section>
+    </div>
+</main>
 </body>
 </html>
