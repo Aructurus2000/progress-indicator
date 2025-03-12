@@ -2,13 +2,23 @@ const circle = document.querySelector('.progress-ring__circle');
 const radius = circle.r.baseVal.value;
 const circumference = 2 * Math.PI * radius;
 const input = document.querySelector('.percent')
-const checkbox = document.querySelector('.checkbox');
+const animateCheckbox = document.querySelector('#animateCheckbox');
+const hideCheckbox = document.querySelector('#hideCheckbox');
+const progressRing = document.querySelector('.progress-ring');
 
-checkbox.addEventListener('change', function() {
+animateCheckbox.addEventListener('change', function() {
     if (this.checked) {
-        circle.classList.add('animate'); // Добавляем анимацию
+        circle.classList.add('animate');
     } else {
-        circle.classList.remove('animate'); // Убираем анимацию
+        circle.classList.remove('animate');
+    }
+});
+
+hideCheckbox.addEventListener('change', function() {
+    if (this.checked) {
+        progressRing.classList.add('hidden');
+    } else {
+        progressRing.classList.remove('hidden');
     }
 });
 

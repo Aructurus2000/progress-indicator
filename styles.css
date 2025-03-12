@@ -1,7 +1,7 @@
 :root {
     --body-background-color: #eef3f6;
     --card-background-color: white;
-    --accent-color: #235fc6;
+    --accent-color: #005fbd;
     --base-accent-color: #dfe6f0;
 }
 
@@ -214,9 +214,20 @@ input[type="number"]::-ms-clear {
 
 .progress-ring__circle {
     transform-origin: center;
-    transform: rotate(-90deg); /* Установить начальный угол на -90deg */
+    transform: rotate(-90deg); /* Устанавливаем начальный угол на -90deg */
 }
 
 .progress-ring__circle.animate {
     animation: rotateCircle 2s linear infinite;
 }
+
+/* Стиль для скрытия блока с помощью opacity */
+.hidden {
+    opacity: 0;
+    transition: opacity 0.3s ease; /* Плавный переход */
+}
+
+.progress-ring {
+    transition: opacity 0.3s ease; /* Плавный переход */
+}
+
