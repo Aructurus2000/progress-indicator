@@ -6,36 +6,36 @@ const animateCheckbox = document.querySelector('#animateCheckbox');
 const hideCheckbox = document.querySelector('#hideCheckbox');
 const progressRing = document.querySelector('.progress-ring');
 
-animateCheckbox.addEventListener('change', function() {
-    if (this.checked) {
-        circle.classList.add('animate');
+// Общая функция для добавления/удаления класса
+function toggleClass(element, className, condition) {
+    if (condition) {
+        element.classList.add(className);
     } else {
-        circle.classList.remove('animate');
+        element.classList.remove(className);
     }
+}
+
+animateCheckbox.addEventListener('change', function() {
+    toggleClass(circle, 'animate', this.checked);
 });
 
 hideCheckbox.addEventListener('change', function() {
-    if (this.checked) {
-        progressRing.classList.add('hidden');
-    } else {
-        progressRing.classList.remove('hidden');
-    }
+    toggleClass(progressRing, 'hidden', this.checked);
 });
 
 window.onload = function() {
-    input.value = 10;
-    setProgress(input.value);
+    const initialValue = 10;
+    input.value = initialValue;
+    setProgress(initialValue);
 };
 
-input.addEventListener('change', function(){
-    setProgress(input.value);
-})
 input.addEventListener('input', function() {
-    let value = parseInt(this.value, 10);
-    if (value < 0) this.value = 0;
-    if (value > 100) this.value = 100;
+    let value = Math.min(100, Math.max(0, parseInt(this.value, 10)));
+    this.value = value;
+    setProgress(value);
 });
 
+// Установка свойств для окружности
 circle.style.strokeDasharray = `${circumference} ${circumference}`;
 circle.style.strokeDashoffset = circumference;
 
