@@ -1,46 +1,76 @@
-const circle = document.querySelector('.progress-ring__circle');
-const radius = circle.r.baseVal.value;
-const circumference = 2 * Math.PI * radius;
-const input = document.querySelector('.percent')
-const animateCheckbox = document.querySelector('#animateCheckbox');
-const hideCheckbox = document.querySelector('#hideCheckbox');
-const progressRing = document.querySelector('.progress-ring');
+class ProgressRing {
+    constructor(element) {
+        this.element = element;
+        this.circle = element.querySelector('.progress-ring__circle');
+        this.backgroundCircle = element.querySelector('.progress-ring__circle-background');
+        this.radius = this.circle.r.baseVal.value;
+        this.circumference = 2 * Math.PI * this.radius;
 
-// Общая функция для добавления/удаления класса
-function toggleClass(element, className, condition) {
-    if (condition) {
-        element.classList.add(className);
-    } else {
-        element.classList.remove(className);
+        this.progress = 0;
+        this.isAnimated = false;
+        this.isHidden = false;
+
+        this.circle.style.strokeDasharray = `${this.circumference} ${this.circumference}`;
+        this.circle.style.strokeDashoffset = this.circumference;
+    }
+
+    setProgress(value) {
+        if (value < 0 || value > 100) return;
+        this.progress = value;
+        const offset = this.circumference - (value / 100 * this.circumference);
+        this.circle.style.strokeDashoffset = offset;
+    }
+
+    startAnimation() {
+        this.isAnimated = true;
+        this.circle.classList.add('animate');
+    }
+
+    stopAnimation() {
+        this.isAnimated = false;
+        this.circle.classList.remove('animate');
+    }
+
+    hide() {
+        this.isHidden = true;
+        this.element.classList.add('hidden');
+    }
+
+    show() {
+        this.isHidden = false;
+        this.element.classList.remove('hidden');
+    }
+
+    initialize(initialProgress) {
+        this.setProgress(initialProgress);
     }
 }
 
-animateCheckbox.addEventListener('change', function() {
-    toggleClass(circle, 'animate', this.checked);
+// Использование компонента
+document.addEventListener('DOMContentLoaded', () => {
+    const progressRingElement = document.querySelector('.progress-ring');
+    const progressRing = new ProgressRing(progressRingElement);
+
+    progressRing.initialize(10);
+
+    document.querySelector('.percent').addEventListener('input', (event) => {
+        const value = Math.min(100, Math.max(0, parseInt(event.target.value, 10)));
+        progressRing.setProgress(value); // Обновить прогресс
+    });
+
+    document.getElementById('animateCheckbox').addEventListener('change', (event) => {
+        if (event.target.checked) {
+            progressRing.startAnimation();
+        } else {
+            progressRing.stopAnimation();
+        }
+    });
+
+    document.getElementById('hideCheckbox').addEventListener('change', (event) => {
+        if (event.target.checked) {
+            progressRing.hide();
+        } else {
+            progressRing.show();
+        }
+    });
 });
-
-hideCheckbox.addEventListener('change', function() {
-    toggleClass(progressRing, 'hidden', this.checked);
-});
-
-window.onload = function() {
-    const initialValue = 10;
-    input.value = initialValue;
-    setProgress(initialValue);
-};
-
-input.addEventListener('input', function() {
-    let value = Math.min(100, Math.max(0, parseInt(this.value, 10)));
-    this.value = value;
-    setProgress(value);
-});
-
-// Установка свойств для окружности
-circle.style.strokeDasharray = `${circumference} ${circumference}`;
-circle.style.strokeDashoffset = circumference;
-
-function setProgress(percent) {
-    const offset = circumference - percent / 100 * circumference;
-    circle.style.strokeDashoffset = offset;
-}
-

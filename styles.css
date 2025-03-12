@@ -1,7 +1,7 @@
 :root {
     --body-background-color: #eef3f6;
     --card-background-color: white;
-    --accent-color: #005fbd;
+    --accent-color: #4092ff;
     --base-accent-color: #dfe6f0;
 }
 
@@ -38,7 +38,7 @@ html, body {
     left: calc(19px + 1vw);
     margin: 0;
     font-weight: 400;
-    font-size: calc(18px + 0.8vw);
+    font-size: calc(16px + 0.8vw);
     font-family: Roboto, sans-serif;
 }
 
@@ -91,7 +91,7 @@ circle {
     padding: 2px 0 0;
     appearance: none;
     outline: none;
-    border: none;
+    border: 1px solid black;
     border-radius: 100px;
     width: 50px;
     height: 30px;
@@ -201,6 +201,7 @@ input[type="number"]::-ms-clear {
         max-height: 372px;
         flex-direction: row;
     }
+
 }
 
 @keyframes rotateCircle {
