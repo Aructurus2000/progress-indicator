@@ -1,76 +1,86 @@
 class ProgressRing {
     constructor(element) {
         this.element = element;
-        this.circle = element.querySelector('.progress-ring__circle');
-        this.backgroundCircle = element.querySelector('.progress-ring__circle-background');
+        this.circle = this.element.querySelector('.progress-ring__circle');
+        this.input = this.element.querySelector('.percent');
+        this.animateCheckbox = this.element.querySelector('.animateCheckbox');
+        this.hideCheckbox = this.element.querySelector('.hideCheckbox');
+        this.progressRing = this.element.querySelector('.progress-ring');
         this.radius = this.circle.r.baseVal.value;
         this.circumference = 2 * Math.PI * this.radius;
-
-        this.progress = 0;
         this.isAnimated = false;
         this.isHidden = false;
 
         this.circle.style.strokeDasharray = `${this.circumference} ${this.circumference}`;
         this.circle.style.strokeDashoffset = this.circumference;
+        this.setProgress(10);
+
+        this.addEventListeners();
     }
 
     setProgress(value) {
-        if (value < 0 || value > 100) return;
-        this.progress = value;
         const offset = this.circumference - (value / 100 * this.circumference);
         this.circle.style.strokeDashoffset = offset;
     }
 
     startAnimation() {
-        this.isAnimated = true;
-        this.circle.classList.add('animate');
+        if (!this.isAnimated) {
+            this.circle.classList.add('animate');
+            this.isAnimated = true;
+        }
     }
 
     stopAnimation() {
-        this.isAnimated = false;
-        this.circle.classList.remove('animate');
+        if (this.isAnimated) {
+            this.circle.classList.remove('animate');
+            this.isAnimated = false;
+        }
     }
 
     hide() {
-        this.isHidden = true;
-        this.element.classList.add('hidden');
+        if (!this.isHidden) {
+            this.progressRing.classList.add('hidden');
+            this.isHidden = true;
+        }
     }
 
     show() {
-        this.isHidden = false;
-        this.element.classList.remove('hidden');
+        if (this.isHidden) {
+            this.progressRing.classList.remove('hidden');
+            this.isHidden = false;
+        }
     }
 
-    initialize(initialProgress) {
-        this.setProgress(initialProgress);
+    addEventListeners() {
+        this.animateCheckbox.addEventListener('change', () => {
+            if (this.animateCheckbox.checked) {
+                this.startAnimation();
+            } else {
+                this.stopAnimation();
+            }
+        });
+
+        this.hideCheckbox.addEventListener('change', () => {
+            if (this.hideCheckbox.checked) {
+                this.hide();
+            } else {
+                this.show();
+            }
+        });
+
+        this.input.addEventListener('input', () => {
+            let value = Math.min(100, Math.max(0, parseInt(this.input.value, 10)));
+            this.input.value = value;
+            this.setProgress(value);
+        });
     }
 }
 
-// Использование компонента
-document.addEventListener('DOMContentLoaded', () => {
-    const progressRingElement = document.querySelector('.progress-ring');
-    const progressRing = new ProgressRing(progressRingElement);
+// Инициализация нескольких экземпляров
+window.onload = function () {
+    const progressBars = document.querySelectorAll('.progress-ring-container');
 
-    progressRing.initialize(10);
-
-    document.querySelector('.percent').addEventListener('input', (event) => {
-        const value = Math.min(100, Math.max(0, parseInt(event.target.value, 10)));
-        progressRing.setProgress(value); // Обновить прогресс
+    progressBars.forEach((container) => {
+        new ProgressRing(container);
     });
-
-    document.getElementById('animateCheckbox').addEventListener('change', (event) => {
-        if (event.target.checked) {
-            progressRing.startAnimation();
-        } else {
-            progressRing.stopAnimation();
-        }
-    });
-
-    document.getElementById('hideCheckbox').addEventListener('change', (event) => {
-        if (event.target.checked) {
-            progressRing.hide();
-        } else {
-            progressRing.show();
-        }
-    });
-});
+};
