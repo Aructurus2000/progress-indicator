@@ -13,7 +13,7 @@ class ProgressRing {
 
         this.circle.style.strokeDasharray = `${this.circumference} ${this.circumference}`;
         this.circle.style.strokeDashoffset = this.circumference;
-        this.setProgress(10);
+        this.setProgress(this.input.value);
 
         this.addEventListeners();
     }
@@ -21,6 +21,7 @@ class ProgressRing {
     setProgress(value) {
         const offset = this.circumference - (value / 100 * this.circumference);
         this.circle.style.strokeDashoffset = offset;
+        this.input.value = value;
     }
 
     startAnimation() {
@@ -89,7 +90,11 @@ window.onload = function () {
         progressBarsInstances.push(progressRingInstance); // Сохраняем экземпляр в массив
     });
 
-    // if (progressBarsInstances[1]) {
-    //     progressBarsInstances[1].setProgress(50); // Устанавливаем 50% для второго прогресс-бара
-    // }
+    if (progressBarsInstances[0]) {
+        progressBarsInstances[0].setProgress(10); // Устанавливаем 50% для второго прогресс-бара
+    }
+
+     if (progressBarsInstances[1]) {
+         progressBarsInstances[1].setProgress(50); // Устанавливаем 50% для второго прогресс-бара
+     }
 };
