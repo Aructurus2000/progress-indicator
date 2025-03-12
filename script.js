@@ -1,10 +1,14 @@
 const circle = document.querySelector('.progress-ring__circle');
 const radius = circle.r.baseVal.value;
-//длина окружности
 const circumference = 2 * Math.PI * radius;
 const input = document.querySelector('.percent')
 
 const animated = document.querySelector('.animate')
+
+window.onload = function() {
+    input.value = 10;
+    setProgress(input.value);
+};
 
 input.addEventListener('change', function(){
     setProgress(input.value);
@@ -23,4 +27,3 @@ function setProgress(percent) {
     circle.style.strokeDashoffset = offset;
 }
 
-console.log(animated)

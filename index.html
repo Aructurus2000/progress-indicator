@@ -12,22 +12,40 @@
 </head>
 <body>
 <main class="main">
-    <svg class="progress-ring" width="120" height="120">
-        <circle class="progress-ring__circle" stroke="white" stroke-width="4" cx="60" cy="60" r="52"
-                fill="transparent"/>
-    </svg>
+    <section class="circular-progress-bar">
+        <h2>Progress</h2>
+        <div class="circular-progress-bar-loader">
+            <svg class="progress-ring">
+                <!-- Серый круг фона -->
+                <circle class="progress-ring__circle-background"
+                        stroke="var(--base-accent-color)"
+                        stroke-width="10"
+                        cx="70" cy="70" r="60"
+                        fill="transparent"/>
+                <!-- Прогресс -->
+                <circle class="progress-ring__circle"
+                        stroke="var(--accent-color)"
+                        stroke-width="10"
+                        cx="70" cy="70" r="60"
+                        fill="transparent"/>
+            </svg>
+        </div>
 
-    <label>
-        <input type="number" min="1" max="100" class="percent"/>
-    </label>
-    <label class="toggle">
-        <input type="checkbox"> Animated
-        <span></span>
-    </label>
-    <label class="toggle">
-        <input type="checkbox"> Hide
-        <span></span>
-    </label>
+        <div class="circular-progress-bar-settings">
+            <label class="input-container">
+                <input type="number" min="1" max="100" class="percent" value="10"/>
+                <span>Value</span>
+            </label>
+            <label class="toggle">
+                <input type="checkbox" class="checkbox"/>
+                <span></span> Animate
+            </label>
+            <label class="toggle">
+                <input type="checkbox" class="checkbox"/>
+                <span></span> Hide
+            </label>
+        </div>
+    </section>
 </main>
 </body>
 </html>
