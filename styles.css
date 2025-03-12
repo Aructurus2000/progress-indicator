@@ -1,0 +1,43 @@
+:root {
+    --body-background-color: #eef3f6;
+    --card-background-color: white;
+    --accent-color: #235fc6;
+    --base-accent-color: #dfe6f0;
+}
+
+/*//////////////////////////////////*/
+
+ body {
+    background-color: var(--body-background-color);
+}
+ main {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     position: relative;
+     height: 100vh;
+     flex-direction: column;
+ }
+
+
+.progress-ring__circle {
+    transform-origin: center;
+    transform: rotate(-90deg);
+    transition: stroke-dashoffset 0.3s;
+
+}
+circle {
+    stroke: white;
+    fill: transparent;
+}
+
+.label-states {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+}
+
+/*//////////////////////////////////*/
+

@@ -6,8 +6,28 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>progress-indicator</title>
+    <link rel="stylesheet" href="css-normalize.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
+<main class="main">
+    <svg class="progress-ring" width="120" height="120">
+        <circle class="progress-ring__circle" stroke="white" stroke-width="4" cx="60" cy="60" r="52"
+                fill="transparent"/>
+    </svg>
 
+    <label>
+        <input type="number" min="1" max="100" class="percent"/>
+    </label>
+    <label class="toggle">
+        <input type="checkbox"> Animated
+        <span></span>
+    </label>
+    <label class="toggle">
+        <input type="checkbox"> Hide
+        <span></span>
+    </label>
+</main>
 </body>
 </html>
