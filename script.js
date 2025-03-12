@@ -132,42 +132,38 @@ class ProgressRing {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Получаем массив элементов с классом .circular-progress-bar
+
     const progressBarElements = document.querySelectorAll('.circular-progress-bar');
 
-    // Проверяем, есть ли такие элементы на странице
+    // Проверка, есть ли элементы на странице
     if (progressBarElements.length > 0) {
         // Если элементы есть, создаем для каждого экземпляр ProgressRing
         window.progressBars = [...progressBarElements]
             .map(el => new ProgressRing(el));
 
-        // Работаем с первым ProgressBar (если он есть)
+        // Работа с первым ProgressBar (если он есть)
         const firstProgressBar = window.progressBars[0];
         firstProgressBar.setProgress(80); // Устанавливаем значение 80%
 
-        // Получаем значение первого элемента
+        // Значение первого элемента
         console.log('firstProgressBar value: ', firstProgressBar.getProgress());
     } else {
-        // Если элементов нет, выводим сообщение в консоль
+        // Если нет элементов
         console.log('На странице нет элементов с классом .circular-progress-bar.');
     }
     // Если нужно создать вручную
     const newProgressBar = new ProgressRing().createProgressBar('newBar');
     newProgressBar.setProgress(77);
 
-
-    const newProgressBar2 = new ProgressRing().createProgressBar('clasww');
+    const newProgressBar2 = new ProgressRing().createProgressBar('container1');
     newProgressBar2.setProgress(88);
     newProgressBar2.removeProgressBar();
-
-    // Получаем значение второго элемента
-    console.log('secondProgressBar value: ', progressBars[1].getProgress());
 
     newProgressBar.onInputChange(sendData);
 
 });
 
-// Отправляем данные на сервер
+// Отправка данных на сервер
 function sendData(value) {
     const url = 'https://burzhumov.com/api/saveProgress';
     const data = {progress: value};
