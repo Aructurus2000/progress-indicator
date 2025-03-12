@@ -55,6 +55,11 @@ html, body {
     height: 140px;
 }
 
+.progress-ring-container:not(:first-child) {
+    margin-top: 10px;
+    transition: opacity 0.3s ease;
+}
+
 .progress-ring__circle-background {
     stroke: var(--base-accent-color);
 }
